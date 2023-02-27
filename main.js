@@ -220,3 +220,80 @@ function replicate(times, number) {
 // console.log(replicate(3, 5)); // [5, 5, 5]
 // console.log(replicate(1, 69)); // [69]
 // console.log(replicate(-2, 6)); // []
+
+let countDown = function f(fromNumber) {
+  let numArr = [];
+  let nextNumber = fromNumber - 1;
+
+  if (nextNumber <= 0) {
+    numArr.push(0);
+  } else {
+    numArr.concat(f(nextNumber));
+  }
+
+  return numArr;
+};
+
+let newYearCountDown = countDown(8);
+// console.log(newYearCountDown);
+
+// Using iteration, write a function fibs which takes a number and returns an array containing that
+// many numbers from the fibonacci sequence. Using an example input of 8, this method should return
+// the array [0, 1, 1, 2, 3, 5, 8, 13]
+
+function fibs(n) {
+  let fibArray = [];
+
+  for (let i = 0; i < n; i++) {
+    if (i === 0) {
+      fibArray.push(0);
+    } else if (i === 1) {
+      fibArray.push(1);
+    } else {
+      let lastFib = fibArray[fibArray.length - 1];
+      let secondLastFib = fibArray[fibArray.length - 2];
+      fibArray.push(lastFib + secondLastFib);
+    }
+  }
+
+  return fibArray;
+}
+
+let callFibs = fibs(8);
+// console.log(callFibs);
+
+function fibRecursive(n) {
+  debugger;
+  if (n <= 0) {
+    return [];
+  } else if (n === 1) {
+    return [0];
+  } else if (n === 2) {
+    return [0, 1];
+  } else {
+    let prev = fibRecursive(n - 1);
+    let current = prev[prev.length - 1] + prev[prev.length - 2];
+    return prev.concat(current);
+  }
+}
+
+let callfibRecursive = fibRecursive(8);
+console.log(callfibRecursive);
+// prev = fibRecursive(-2 - 1) = [] rev = fibRecursive(-1 - 1) = [] rev = fibRecursive(0 - 1) = []
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [] base 0
+// prev = fibRecursive(1 - 1) = 0
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [1] base 1
+// prev = fibRecursive(2 - 1) = 1
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1] base 2
+// prev = fibRecursive(3 - 1) = 2
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1]
+// prev = fibRecursive(4 - 1) = 3
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1, 2]
+// prev = fibRecursive(5 - 1) = 4
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1, 2, 3]
+// prev = fibRecursive(6 - 1) = 5
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1, 2, 3, 5]
+// prev = fibRecursive(7 - 1) = 6
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1, 2, 3, 5, 8]
+// prev = fibRecursive(8 - 1) = 7
+// current = fibRecursive[length - 1] + fibRecursive[length - 2] [0, 1, 1, 2, 3, 5, 8, 13]
